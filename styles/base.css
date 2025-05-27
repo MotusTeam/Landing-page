@@ -143,14 +143,6 @@ main {
     height: 1.6rem;
 }
 
-.auth-buttons{
-
-    order: 3;
-    display: flex;
-    gap: 1rem;
-    margin-left: auto;
-    padding-left: 2rem;
-}
 
 .auth-buttons .btn {
     border: none;
