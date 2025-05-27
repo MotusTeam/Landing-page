@@ -1,2 +1,3 @@
-# Motus-LP
-Motuscar Landing Page Repo
+# Motuscar Landing Page Project
+
+Repositorio deploy de la Landing Page de Motuscar
