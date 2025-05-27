@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const icon = hamburgerBtn.querySelector('i');
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
+
+            
         }
     });
 });
@@ -96,6 +98,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const dropdownMenu = document.getElementById('dropdown-menu');
     const conocenosLink = document.getElementById('conocenos-link');
+    const nosotrosLink = document.getElementById('nosotros-link');
+
+    // Evento para el enlace "Nosotros"
+    if (nosotrosLink) {
+        nosotrosLink.addEventListener('click', () => {
+            if (dropdownMenu.classList.contains('active')) {
+                dropdownMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+
+
 
     // Elementos del formulario
     const ctaButton = document.querySelector('.cta-hero');

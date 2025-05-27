@@ -2,6 +2,17 @@
     --navbar-height: 2.5rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+#Servicios {
+    scroll-margin-top: 4.0rem; /* Ajusta este valor al alto de tu navbar */
+}
+
+#Quienes-Somos {
+    scroll-margin-top: 3.0rem; /* Ajusta este valor al alto de tu navbar */
+}
 /* Animación de carga */
 .loading-overlay {
     position: fixed;
