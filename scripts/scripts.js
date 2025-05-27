@@ -6,178 +6,15 @@ window.addEventListener('load', function() {
 });
 
 //Botón Hamburguesa
-
 document.addEventListener('DOMContentLoaded', function() {
-    const hamburgerBtn = document.getElementById('hamburguer-btn');
-    const dropdownMenu = document.getElementById('dropdown-menu');
-    
-    hamburgerBtn.addEventListener('click', function() {
-        dropdownMenu.classList.toggle('active');
-        
-        // Cambiar icono al abrir/cerrar
-        const icon = this.querySelector('i');
-        if (dropdownMenu.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
-    });
-    
-    // Cerrar menú al hacer clic fuera de él
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.menu-hamburguesa')) {
-            dropdownMenu.classList.remove('active');
-            const icon = hamburgerBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-
-            
-        }
-    });
-});
-
-
-// Carrusel del Hero
-// Asegúrate que el carrusel funcione correctamente
-document.addEventListener('DOMContentLoaded', function() {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const indicators = document.querySelectorAll('.indicator');
-    const prevBtn = document.querySelector('.carousel-prev');
-    const nextBtn = document.querySelector('.carousel-next');
-    let currentIndex = 0;
-    let interval;
-    
-    function updateCarousel() {
-        slides.forEach((slide, index) => {
-            slide.classList.toggle('active', index === currentIndex);
-        });
-        
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentIndex);
-        });
-    }
-    
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateCarousel();
-    }
-    
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateCarousel();
-    }
-    
-    // Event listeners
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
-    
-    // Iniciar carrusel automático
-    function startAutoSlide() {
-        interval = setInterval(nextSlide, 5000);
-    }
-    
-    function stopAutoSlide() {
-        clearInterval(interval);
-    }
-    
-    // Pausar al interactuar
-    const hero = document.querySelector('.hero');
-    hero.addEventListener('mouseenter', stopAutoSlide);
-    hero.addEventListener('mouseleave', startAutoSlide);
-    
-    startAutoSlide();
-    updateCarousel();
-});
-
-//funcionalidad formulario
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Elementos del menú hamburguesa
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const dropdownMenu = document.getElementById('dropdown-menu');
-    const conocenosLink = document.getElementById('conocenos-link');
-    const nosotrosLink = document.getElementById('nosotros-link');
-
-    // Evento para el enlace "Nosotros"
-    if (nosotrosLink) {
-        nosotrosLink.addEventListener('click', () => {
-            if (dropdownMenu.classList.contains('active')) {
-                dropdownMenu.classList.remove('active');
-                const icon = hamburgerBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-    }
-
-
-
-    // Elementos del formulario
-    const ctaButton = document.querySelector('.cta-hero');
-    const overlay = document.getElementById('formulario-overlay');
-
-    // Función para abrir el formulario
-    function abrirFormulario() {
-        fetch('form.html')
-            .then(response => response.text())
-            .then(html => {
-                overlay.innerHTML = html;
-                overlay.style.display = 'flex';
-
-                // Cierre al hacer clic en "Cerrar"
-                const closeBtn = overlay.querySelector('#cerrar-formulario');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', cerrarFormulario);
-                }
-
-                // Cierre al hacer clic fuera del formulario
-                overlay.addEventListener('click', (event) => {
-                    const form = overlay.querySelector('.formulario-registro');
-                    if (event.target === overlay || (form && !form.contains(event.target))) {
-                        cerrarFormulario();
-                    }
-                });
-            })
-            .catch(err => {
-                console.error('Error al cargar el formulario:', err);
-            });
-    }
-
-    function cerrarFormulario() {
-        overlay.style.display = 'none';
-        overlay.innerHTML = '';
-    }
-
-    // Evento para el botón CTA original
-    if (ctaButton) {
-        ctaButton.addEventListener('click', abrirFormulario);
-    }
-
-    // Evento para el enlace "Conócenos"
-    if (conocenosLink) {
-        conocenosLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Cierra el menú hamburguesa
-            if (dropdownMenu.classList.contains('active')) {
-                dropdownMenu.classList.remove('active');
-                const icon = hamburgerBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-            
-            // Abre el formulario
-            abrirFormulario();
-        });
-    }
-
-    // Evento para el botón hamburguesa
-    if (hamburgerBtn) {
+    
+    if (hamburgerBtn && dropdownMenu) {
         hamburgerBtn.addEventListener('click', function() {
             dropdownMenu.classList.toggle('active');
             
+            // Cambiar icono al abrir/cerrar
             const icon = this.querySelector('i');
             if (dropdownMenu.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -187,22 +24,127 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon.classList.add('fa-bars');
             }
         });
-    }
-
-    // Cerrar menú al hacer clic fuera de él
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.menu-hamburguesa') && dropdownMenu) {
-            dropdownMenu.classList.remove('active');
-            const icon = hamburgerBtn?.querySelector('i');
-            if (icon) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+        
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.menu-hamburguesa')) {
+                dropdownMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             }
-        }
-    });
+        });
+    }
 });
 
-// Mockpage IA - Código actualizado
+// Carrusel del Hero
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    
+    if (slides.length > 0 && indicators.length > 0 && prevBtn && nextBtn) {
+        let currentIndex = 0;
+        let interval;
+        
+        function updateCarousel() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentIndex);
+            });
+            
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        }
+        
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Iniciar carrusel automático
+        function startAutoSlide() {
+            interval = setInterval(nextSlide, 5000);
+        }
+        
+        function stopAutoSlide() {
+            clearInterval(interval);
+        }
+        
+        // Pausar al interactuar
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.addEventListener('mouseenter', stopAutoSlide);
+            hero.addEventListener('mouseleave', startAutoSlide);
+        }
+        
+        startAutoSlide();
+        updateCarousel();
+    }
+});
+
+// Funcionalidad Formulario - Versión definitiva
+document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('formulario-overlay');
+    const ctaButton = document.querySelector('.cta-hero');
+    const conocenosLink = document.getElementById('conocenos-link');
+    const cerrarBtn = document.getElementById('cerrar-formulario');
+    
+    // Función para abrir el formulario
+    function abrirFormulario() {
+        if (overlay) {
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Bloquear scroll del body
+        }
+    }
+    
+    // Función para cerrar el formulario
+    function cerrarFormulario() {
+        if (overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restaurar scroll del body
+        }
+    }
+    
+    // Event Listeners
+    if (ctaButton) {
+        ctaButton.addEventListener('click', abrirFormulario);
+    }
+    
+    if (conocenosLink) {
+        conocenosLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            abrirFormulario();
+        });
+    }
+    
+    if (cerrarBtn) {
+        cerrarBtn.addEventListener('click', cerrarFormulario);
+    }
+    
+    // Cerrar al hacer clic fuera del formulario
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                cerrarFormulario();
+            }
+        });
+    }
+});
+
+// Mockpage IA
 document.addEventListener('DOMContentLoaded', () => {
     const phrases = [
         '¿Te ayudo en algo?',
@@ -217,66 +159,71 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const assistButtonContainer = document.querySelector('.assist-button-container');
-    let tooltip = null;
-    let scrollHandler = null;
+    
+    if (assistButtonContainer) {
+        let tooltip = null;
+        let scrollHandler = null;
 
-    function getRandomPhrase() {
-        return phrases[Math.floor(Math.random() * phrases.length)];
-    }
-
-    function adjustTooltipPosition() {
-        if (!tooltip) return;
-        
-        const buttonRect = assistButtonContainer.getBoundingClientRect();
-        const tooltipRect = tooltip.getBoundingClientRect();
-        const margin = 20;
-
-        let left = buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2;
-        let top = buttonRect.top - tooltipRect.height - 10;
-
-        // Ajustar si se desborda por la izquierda
-        if (left < margin) left = margin;
-
-        // Ajustar si se desborda por la derecha
-        if (left + tooltipRect.width + margin > window.innerWidth) {
-            left = window.innerWidth - tooltipRect.width - margin;
+        function getRandomPhrase() {
+            return phrases[Math.floor(Math.random() * phrases.length)];
         }
 
-        // Si no hay espacio arriba, mostrar debajo del botón
-        if (top < margin) {
-            top = buttonRect.bottom + 10;
-        }
-
-        tooltip.style.left = `${left}px`;
-        tooltip.style.top = `${top}px`;
-    }
-
-    assistButtonContainer.addEventListener('mouseenter', () => {
-        // Crear tooltip si no existe
-        if (!tooltip) {
-            tooltip = document.createElement('div');
-            tooltip.classList.add('assist-tooltip');
-            tooltip.textContent = getRandomPhrase();
-            document.body.appendChild(tooltip);
+        function adjustTooltipPosition() {
+            if (!tooltip) return;
             
-            // Esperamos un frame para forzar el reflow
-            requestAnimationFrame(() => {
-                adjustTooltipPosition();
-                tooltip.classList.add('fade-in');
-            });
-            
-            // Añadir listener para scroll
-            scrollHandler = () => adjustTooltipPosition();
-            window.addEventListener('scroll', scrollHandler);
-        }
-    });
+            const buttonRect = assistButtonContainer.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const margin = 20;
 
-    assistButtonContainer.addEventListener('mouseleave', () => {
-        if (tooltip) {
-            tooltip.remove();
-            tooltip = null;
-            window.removeEventListener('scroll', scrollHandler);
-            scrollHandler = null;
+            let left = buttonRect.left + buttonRect.width / 2 - tooltipRect.width / 2;
+            let top = buttonRect.top - tooltipRect.height - 10;
+
+            // Ajustar si se desborda por la izquierda
+            if (left < margin) left = margin;
+
+            // Ajustar si se desborda por la derecha
+            if (left + tooltipRect.width + margin > window.innerWidth) {
+                left = window.innerWidth - tooltipRect.width - margin;
+            }
+
+            // Si no hay espacio arriba, mostrar debajo del botón
+            if (top < margin) {
+                top = buttonRect.bottom + 10;
+            }
+
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${top}px`;
         }
-    });
+
+        assistButtonContainer.addEventListener('mouseenter', () => {
+            // Crear tooltip si no existe
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.classList.add('assist-tooltip');
+                tooltip.textContent = getRandomPhrase();
+                document.body.appendChild(tooltip);
+                
+                // Esperamos un frame para forzar el reflow
+                requestAnimationFrame(() => {
+                    adjustTooltipPosition();
+                    tooltip.classList.add('fade-in');
+                });
+                
+                // Añadir listener para scroll
+                scrollHandler = () => adjustTooltipPosition();
+                window.addEventListener('scroll', scrollHandler);
+            }
+        });
+
+        assistButtonContainer.addEventListener('mouseleave', () => {
+            if (tooltip) {
+                tooltip.remove();
+                tooltip = null;
+                if (scrollHandler) {
+                    window.removeEventListener('scroll', scrollHandler);
+                }
+                scrollHandler = null;
+            }
+        });
+    }
 });
