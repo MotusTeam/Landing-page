@@ -39,9 +39,17 @@
     <header class="header">
         <nav class="navbar">
             <div class="menu-hamburguesa">
-                <button>
+                <button id="hamburger-btn">
                     <i class="fa-solid fa-bars"></i>
                 </button>
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <ul>
+                        <li class="ham-btn-element"><a href="index.html">Inicio</a></li>
+                        <li class="ham-btn-element"><a href="about-us.html">Nosotros</a></li>
+                        <li class="ham-btn-element"><a href="services.html">Servicios</a></li>
+                        <li class="ham-btn-element"><a href="#" id="conocenos-link">Conócenos</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="logo">
                 <a href="index.html"><img src="assets/imgs/Motuscar-logo.webp" alt="MotusCar Logo"></a>
@@ -147,14 +155,12 @@
                 </div>
             </div>
         </section>
-        <section>
-            <i class="fa-solid fa-bars"></i>
-        </section>
-        <div class="assist-button-container">
+        <!-- Mock IA-->
+        <!-- <div class="assist-button-container">
             <button class="assist-button">
                 <i class="fa-solid fa-robot"></i>
             </button>
-        </div>
+        </div> -->
     </main>
     <!--Footer-->
     <footer id="contacto">

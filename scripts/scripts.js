@@ -5,6 +5,38 @@ window.addEventListener('load', function() {
     }, 2000);
 });
 
+//Botón Hamburguesa
+
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerBtn = document.getElementById('hamburguer-btn');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    
+    hamburgerBtn.addEventListener('click', function() {
+        dropdownMenu.classList.toggle('active');
+        
+        // Cambiar icono al abrir/cerrar
+        const icon = this.querySelector('i');
+        if (dropdownMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+    
+    // Cerrar menú al hacer clic fuera de él
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.menu-hamburguesa')) {
+            dropdownMenu.classList.remove('active');
+            const icon = hamburgerBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+});
+
+
 // Carrusel del Hero
 // Asegúrate que el carrusel funcione correctamente
 document.addEventListener('DOMContentLoaded', function() {
@@ -60,10 +92,17 @@ document.addEventListener('DOMContentLoaded', function() {
 //funcionalidad formulario
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Elementos del menú hamburguesa
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    const conocenosLink = document.getElementById('conocenos-link');
+
+    // Elementos del formulario
     const ctaButton = document.querySelector('.cta-hero');
     const overlay = document.getElementById('formulario-overlay');
 
-    ctaButton.addEventListener('click', () => {
+    // Función para abrir el formulario
+    function abrirFormulario() {
         fetch('form.html')
             .then(response => response.text())
             .then(html => {
@@ -72,12 +111,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Cierre al hacer clic en "Cerrar"
                 const closeBtn = overlay.querySelector('#cerrar-formulario');
-                closeBtn.addEventListener('click', cerrarFormulario);
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', cerrarFormulario);
+                }
 
                 // Cierre al hacer clic fuera del formulario
                 overlay.addEventListener('click', (event) => {
                     const form = overlay.querySelector('.formulario-registro');
-                    if (event.target === overlay || !form.contains(event.target)) {
+                    if (event.target === overlay || (form && !form.contains(event.target))) {
                         cerrarFormulario();
                     }
                 });
@@ -85,12 +126,63 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => {
                 console.error('Error al cargar el formulario:', err);
             });
-    });
+    }
 
     function cerrarFormulario() {
         overlay.style.display = 'none';
         overlay.innerHTML = '';
     }
+
+    // Evento para el botón CTA original
+    if (ctaButton) {
+        ctaButton.addEventListener('click', abrirFormulario);
+    }
+
+    // Evento para el enlace "Conócenos"
+    if (conocenosLink) {
+        conocenosLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Cierra el menú hamburguesa
+            if (dropdownMenu.classList.contains('active')) {
+                dropdownMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+            
+            // Abre el formulario
+            abrirFormulario();
+        });
+    }
+
+    // Evento para el botón hamburguesa
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('active');
+            
+            const icon = this.querySelector('i');
+            if (dropdownMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+
+    // Cerrar menú al hacer clic fuera de él
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.menu-hamburguesa') && dropdownMenu) {
+            dropdownMenu.classList.remove('active');
+            const icon = hamburgerBtn?.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+    });
 });
 
 // Mockpage IA - Código actualizado
